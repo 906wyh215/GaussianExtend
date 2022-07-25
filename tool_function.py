@@ -173,18 +173,3 @@ def KD(GPR, opt_X, opt_y, mean, std, virtual_X, MC_num=500):
     return virtual_X[maxKD_index[0]]
 
 
-if __name__ == '__main__':
-    param_grid = {'a': (50, 100),
-                  'l1': (5, 80),
-                  'l2': (5, 80),
-                  'l3': (5, 80),
-                  'l4': (5, 80)}
-    # print(param_grid.keys())
-    # for i in param_grid.keys():
-    #     print(i)
-    get_virtual_sample(param_grid, 10)
-    a = [[1, 2], [3, 4]]
-    res = itertools.product(*a)
-    print(list(res))
-    print(len(param_grid))
-    print([1] * 4)
