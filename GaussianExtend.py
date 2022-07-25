@@ -149,26 +149,3 @@ class GaussianExtend(object):
         noise = data.iloc[:, -1:]
         return X, y, noise
 
-
-if __name__ == '__main__':
-    def bayesopt_objective(a, l1):  # 贝叶斯优化目标函数
-        kernel = ConstantKernel(a ** 2, constant_value_bounds='fixed') * \
-                 RBF(length_scale=l1,
-                     length_scale_bounds='fixed')
-        model = GaussianExtend(X, y)
-        score = model.anisotropic_noise_cv(kernel, alpha_, scoring='r2', cv=3)
-        # score = -mean_squared_error(text_y, model.predict(text_x), squared=False)
-        return score  # 返回的是全数据集上的打分，过拟合
-
-
-    X, y, alpha_ = read_data('test.csv')
-    kernel = RBF()
-    model = GaussianExtend(X, y)
-    # print(model.anisotropic_noise_cv(alpha_, cv=5, scoring='r2'))
-    param_grid = {'a': (50, 55),
-                  'l1': (5, 10), }
-    # 'l2': (25, 30),
-    # 'l3': (40, 50),
-    # 'l4': (4, 50)}
-    # model.bayes_opt_parameters(bayesopt_objective, param_grid)
-    model.BGO_parameters(bayesopt_objective, param_grid, 3, n_iter=10, acq='kd', alpha=1)
